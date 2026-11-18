@@ -33,5 +33,5 @@ jobs:
       - name: APK সংরক্ষণ
         uses: actions/upload-artifact@v4
         with:
-          name: member-app-debug
+          name: todosync-app-debug
           path: app/build/outputs/apk/debug/*.apk
