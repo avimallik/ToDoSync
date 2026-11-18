@@ -19,6 +19,7 @@ class ToDoApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        setupRecurringWork()
     }
 
     private fun setupRecurringWork() {

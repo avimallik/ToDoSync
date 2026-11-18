@@ -1,5 +1,6 @@
 package com.example.todosync.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +24,17 @@ class TodoAdapter: ListAdapter<Todo, TodoAdapter.TodoViewHolder>(TodoDiffCallbac
 
     class TodoViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.todoTitle)
+        val status: TextView = view.findViewById(R.id.todoStatus)
+
         fun bind(todo: Todo) {
             title.text = todo.title
+            if (todo.completed){
+                status.text = "Done"
+                status.setTextColor(Color.parseColor("#2E7D32"))
+            }else{
+                status.text = "Pending"
+                status.setTextColor(Color.parseColor("#757575"))
+            }
         }
     }
 }

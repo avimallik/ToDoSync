@@ -3,6 +3,7 @@ package com.example.todosync
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todosync.adapter.TodoAdapter
@@ -49,6 +50,16 @@ class MainActivity : AppCompatActivity() {
                 Log.d("TodoSync", "UI updated with: ${todoList.size} items")
             }
         }
+
+        viewModel.isLoading.observe(this) { loading ->
+            binding.progressBar.isVisible = loading
+        }
+
+        viewModel.error.observe(this) { message ->
+            binding.errorText.isVisible = message != null
+            binding.errorText.text = message
+        }
+
     }
 
 
