@@ -53,5 +53,5 @@ jobs:
         run: |
           firebase appdistribution:distribute app/build/outputs/apk/debug/app-debug.apk \
             --app "${{ secrets.FIREBASE_APP_ID }}" \
-            --testers "yourmail@gmail.com" \
+            --testers "arunavmallikavi@gmail.com, samuelroyfb@gmail.com" \
             --release-notes "GitHub Actions build number ${{ github.run_number }}"
