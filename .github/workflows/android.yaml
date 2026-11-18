@@ -35,3 +35,23 @@ jobs:
         with:
           name: todosync-app-debug
           path: app/build/outputs/apk/debug/*.apk
+          
+      - name: Secret test
+        run: echo "todosync secret ${{secrets.TEST_SECRET}}"
+        
+      - name: Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Service account creation
+        env: 
+          SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: printf '%s' "$SA_KEY" > "$RUNNER_TEMP/firebase-key.json"
+
+      - name: sent Test build to testers
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-key.json
+        run: |
+          firebase appdistribution:distribute app/build/outputs/apk/debug/app-debug.apk \
+            --app "${{ secrets.FIREBASE_APP_ID }}" \
+            --testers "arunavmallikavi@gmail.com, samuelroyfb@gmail.com" \
+            --release-notes "GitHub Actions build number ${{ github.run_number }}"
