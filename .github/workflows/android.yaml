@@ -35,3 +35,6 @@ jobs:
         with:
           name: todosync-app-debug
           path: app/build/outputs/apk/debug/*.apk
+          
+      - name: Secret test
+        run: echo "todosync secret ${{secrets.TEST_SECRET}}"
