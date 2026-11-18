@@ -1,0 +1,37 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: কোড নামানো
+        uses: actions/checkout@v4
+
+      - name: Java 17 বসানো
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: gradlew চালানোর অনুমতি
+        run: chmod +x gradlew
+
+      - name: Unit test চালানো
+        run: ./gradlew testDebugUnitTest
+
+      - name: Debug APK বানানো
+        run: ./gradlew assembleDebug
+
+      - name: APK সংরক্ষণ
+        uses: actions/upload-artifact@v4
+        with:
+          name: member-app-debug
+          path: app/build/outputs/apk/debug/*.apk
