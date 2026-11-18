@@ -8,6 +8,14 @@
     tools:context=".MainActivity"
     orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Todo Sync"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:textStyle="bold"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
